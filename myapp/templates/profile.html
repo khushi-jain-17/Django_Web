@@ -1,0 +1,770 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>Alcyone :: EMS</title>
+
+    <link rel="apple-touch-icon" href="{% static 'app-assets/images/ico/apple-icon-120.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app-assets/images/ico/favicon.ico' %}">
+    <link rel="icon" type="image/png" href="{% static 'app-assets/images/ico/favicon.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/charts/apexcharts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/toastr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/pickers/pickadate/pickadate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css' %}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/bordered-layout.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.min.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/dashboard-ecommerce.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/forms/pickers/form-flat-pickr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/charts/chart-apex.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/extensions/ext-component-toastr.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/forms/pickers/form-pickadate.min.css' %}">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar navbar-expand-lg align-items-center navbar-light navbar-shadow p-0 fixed-top">
+        <div class="navbar-container d-flex content">
+            <div class="bookmark-wrapper d-flex align-items-center">
+                <ul class="nav navbar-nav d-xl-none">
+                    <li class="nav-item"><a class="nav-link menu-toggle" href="#"><i class="ficon" data-feather="menu"></i></a></li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav align-items-center ms-auto">
+                <li class="nav-item dropdown dropdown-notification me-25"><a class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge rounded-pill bg-danger badge-up">5</span></a>
+                    <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
+                        <li class="dropdown-menu-header">
+                            <div class="dropdown-header d-flex">
+                                <h4 class="notification-title mb-0 me-auto">Notifications</h4>
+                                <div class="badge rounded-pill badge-light-primary">6 New</div>
+                            </div>
+                        </li>
+                        <li class="scrollable-container media-list">
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar"><img src="{% static 'app-assets/images/portrait/small/avatar-s-15.jpg' %}" alt="avatar" width="32" height="32"></div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">Congratulation Sam 🎉</span>winner!</p><small class="notification-text"> Won the monthly best seller badge.</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar"><img src="{% static 'app-assets/images/portrait/small/avatar-s-3.jpg' %}" alt="avatar" width="32" height="32"></div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">New message</span>&nbsp;received</p><small class="notification-text"> You have 10 unread messages</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar bg-light-danger">
+                                            <div class="avatar-content">MD</div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">Revised Order 👋</span>&nbsp;checkout</p><small class="notification-text"> MD Inc. order updated</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="list-item d-flex align-items-center">
+                                <h6 class="fw-bolder me-auto mb-0">System Notifications</h6>
+                                <div class="form-check form-check-primary form-switch">
+                                    <input class="form-check-input" id="systemNotification" type="checkbox" checked="">
+                                    <label class="form-check-label" for="systemNotification"></label>
+                                </div>
+                            </div>
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar bg-light-danger">
+                                            <div class="avatar-content"><i class="avatar-icon" data-feather="x"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">Server down</span>&nbsp;registered</p><small class="notification-text"> USA Server is down due to high CPU usage</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar bg-light-success">
+                                            <div class="avatar-content"><i class="avatar-icon" data-feather="check"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">Sales report</span>&nbsp;generated</p><small class="notification-text"> Last month sales report generated</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar bg-light-warning">
+                                            <div class="avatar-content"><i class="avatar-icon" data-feather="alert-triangle"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading"><span class="fw-bolder">High memory</span>&nbsp;usage</p><small class="notification-text"> BLR Server using high memory</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-menu-footer"><a class="btn btn-primary w-100" href="#">Read all notifications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown dropdown-user">
+                    <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">Mayank</span><span class="user-status">1001001</span></div><span class="avatar"><img class="round" src="{% static 'app-assets/images/portrait/small/avatar-s-1.jpg' %}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
+                        <a class="dropdown-item" href="profile.html"><i class="me-50" data-feather="user"></i> Profile</a>
+                        <a class="dropdown-item" href="page-account-settings-account.html"><i class="me-50" data-feather="settings"></i> Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'login' %}"><i class="me-50" data-feather="power"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- END: Header-->
+
+
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="{% static 'app-assets/images/logo/logo.png' %}" class="" alt="Alcyone"></a>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{% url 'index' %}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span></a>
+                </li>
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Quick &amp; Links</span><i data-feather="more-horizontal"></i>
+                </li>
+                <li class="active nav-item"><a class="d-flex align-items-center" href="{% url 'home' %}"><i data-feather="user"></i><span class="menu-title text-truncate">My Profile</span></a>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{% url 'holiday' %}"><i data-feather="sun"></i><span class="menu-title text-truncate">Holidays</span></a>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i><span class="menu-title text-truncate">Payroll</span></a>
+                    <ul class="menu-content">
+                        <li><a class="d-flex align-items-center" href="payslip.html"><i data-feather="file-text"></i><span class="menu-item text-truncate" >Payslip</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="#"><i data-feather="file"></i><span class="menu-item text-truncate">Salary</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Dashboard Ecommerce Starts -->
+                <section id="dashboard-ecommerce">
+                    <div class="row match-height">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <!-- User Card -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="user-avatar-section">
+                                        <div class="d-flex align-items-center flex-column">
+                                            <img class="img-fluid rounded mt-2 mb-2" src="{% static 'app-assets/images/portrait/small/avatar-s-1.jpg' %}" height="110" width="110" alt="User avatar" />
+                                            <div class="user-info text-center">
+                                                <h4>Mayank Kumar Sharma</h4>
+                                                <span class="badge bg-light-secondary">Lead Software Developer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="info-container">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Emp. ID:</span>
+                                                <span>1001001</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Name:</span>
+                                                <span>Mayank Kumar Sharma</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Email:</span>
+                                                <span>mayank.sharma@alcyone.in</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Status:</span>
+                                                <span class="badge bg-light-success">Active</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Role:</span>
+                                                <span>Lead Software Developer</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Contact:</span>
+                                                <span>8103561887</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Emergency Contact:</span>
+                                                <span>9111023020</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Blood Group:</span>
+                                                <span>O+</span>
+                                            </li>
+
+                                        </ul>
+                                        <div class="d-flex justify-content-center pt-2">
+                                            <a href="javascript:;" class="btn btn-primary me-1" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /User Card -->
+                        </div>
+                        <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+                            <!-- User Pills -->
+                            <ul class="nav nav-pills mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="profile-tab-fill" data-bs-toggle="pill" href="#profile-fill" aria-expanded="true">
+                                        <i data-feather="user" class="font-medium-3 me-50"></i>
+                                        <span class="fw-bold">Profile</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="bank-tab-fill" data-bs-toggle="pill" href="#bank-fill" aria-expanded="false">
+                                        <i data-feather="credit-card" class="font-medium-3 me-50"></i>
+                                        <span class="fw-bold">Bank Info</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="leaves-tab-fill" data-bs-toggle="pill" href="#leaves-fill" aria-expanded="false">
+                                        <i data-feather="sun" class="font-medium-3 me-50"></i>
+                                        <span class="fw-bold">Leaves</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="education-tab-fill" data-bs-toggle="pill" href="#education-fill" aria-expanded="false">
+                                        <i data-feather="bookmark" class="font-medium-3 me-50"></i>
+                                        <span class="fw-bold">Education</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " id="experience-tab-fill" data-bs-toggle="pill" href="#experience-fill" aria-expanded="false">
+                                        <i data-feather="award" class="font-medium-3 me-50"></i>
+                                        <span class="fw-bold">Experience</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--/ User Pills -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile-fill" role="tabpanel" aria-labelledby="profile-tab-fill" aria-expanded="true">
+
+                                    <!-- Personal Informations -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-50">Personal Informations</h4>
+                                            <button class="btn btn-primary btn-sm edit-address" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddressModal">
+                                        <span data-feather="edit-2"></span>
+                                    </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-7 col-12">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Nationality:</dt>
+                                                        <dd class="col-sm-8 mb-1">Indian</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Religion:</dt>
+                                                        <dd class="col-sm-8 mb-1">Hindu</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Marital status:</dt>
+                                                        <dd class="col-sm-8 mb-1">Married</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Address:</dt>
+                                                        <dd class="col-sm-8 mb-1">Shekhar central, 813, New Palasia, Indore, Madhya Pradesh</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xl-5 col-12">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
+                                                        <dd class="col-sm-8 mb-1">8103561887</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
+                                                        <dd class="col-sm-8 mb-1">India</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
+                                                        <dd class="col-sm-8 mb-1">Madhya Pradesh</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
+                                                        <dd class="col-sm-8 mb-1">452001</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Personal Informations -->
+                                    <!-- Emergency Contact -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-50">Emergency Contact</h4>
+                                            <button class="btn btn-primary btn-sm edit-address" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddressModal"><span data-feather="edit-2"></span></button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Primary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1">Nidhi Sharma</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1">Wife</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1"> 9111023020</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Secondary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1">Chetan Joshi</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1">Brother</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1"> 8109286754</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Emergency Contact -->
+                                </div>
+                                <div class="tab-pane" id="bank-fill" role="tabpanel" aria-labelledby="bank-tab-fill" aria-expanded="false">
+                                    <!-- Bank  Informations -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-50">Bank Informations</h4>
+                                            <button class="btn btn-primary btn-sm edit-address" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddressModal">
+                                        <span data-feather="edit-2"></span>
+                                    </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-12 col-12">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Bank name:</dt>
+                                                        <dd class="col-sm-8 mb-1">HDFC Bank</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Bank account No.:</dt>
+                                                        <dd class="col-sm-8 mb-1">159843014641</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">IFSC Code:</dt>
+                                                        <dd class="col-sm-8 mb-1">HDFC07710</dd>
+
+                                                        <dt class="col-sm-4 fw-bolder mb-1">PAN No:</dt>
+                                                        <dd class="col-sm-8 mb-1">TC000Y56</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Bank Informations -->
+                                </div>
+                                <div class="tab-pane" id="leaves-fill" role="tabpanel" aria-labelledby="leaves-tab-fill" aria-expanded="false">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <div class="card">
+                                                <div class="card-body pb-50">
+                                                    <h6>Annual Leave</h6>
+                                                    <h2 class="fw-bolder mb-1">12</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <div class="card">
+                                                <div class="card-body pb-50">
+                                                    <h6>Medical Leave</h6>
+                                                    <h2 class="fw-bolder mb-1">4</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <div class="card">
+                                                <div class="card-body pb-50">
+                                                    <h6>Other Leave</h6>
+                                                    <h2 class="fw-bolder mb-1">3</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <div class="card">
+                                                <div class="card-body pb-50">
+                                                    <h6>Remaining Leave</h6>
+                                                    <h2 class="fw-bolder mb-1">5</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-50">Leaves</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Leave Type</th>
+                                                            <th>From</th>
+                                                            <th>To</th>
+                                                            <th># Days</th>
+                                                            <th>Status</th>
+                                                            <th>Approved by</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="fw-bold">Casual Leave</span>
+                                                            </td>
+                                                            <td>02 Dec. 2021</td>
+                                                            <td>02 Dec. 2021</td>
+                                                            <td>1 Day</td>
+                                                            <td><span class="badge rounded-pill badge-light-warning me-1">Pending</span></td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="fw-bold">Medical Leave</span>
+                                                            </td>
+                                                            <td>21 Nov. 2021</td>
+                                                            <td>23 Nov. 2021</td>
+                                                            <td>3 Days</td>
+                                                            <td><span class="badge rounded-pill badge-light-success me-1">Approved</span></td>
+                                                            <td>Team Lead</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="fw-bold">Casual Leave</span>
+                                                            </td>
+                                                            <td>18 Nov. 2021</td>
+                                                            <td>18 Nov. 2021</td>
+                                                            <td>1 Day</td>
+                                                            <td><span class="badge rounded-pill badge-light-danger me-1">Declined</span></td>
+                                                            <td>HR</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="fw-bold">Casual Leave</span>
+                                                            </td>
+                                                            <td>02 Dec. 2021</td>
+                                                            <td>02 Dec. 2021</td>
+                                                            <td>1 Day</td>
+                                                            <td><span class="badge rounded-pill badge-light-warning me-1">Pending</span></td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="education-fill" role="tabpanel" aria-labelledby="education-tab-fill" aria-expanded="false">
+                                    <div class="card">
+                                        <h4 class="card-header">Education Informations</h4>
+                                        <div class="card-body pt-1">
+                                            <ul class="timeline ms-50">
+                                                <li class="timeline-item">
+                                                    <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    <div class="timeline-event">
+                                                        <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                            <h6>International College of Arts and Science (UG)</h6>
+                                                            <span class="timeline-event-time me-1">2000-2003</span>
+                                                        </div>
+                                                        <p>Bsc Computer Science</p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item">
+                                                    <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    <div class="timeline-event">
+                                                        <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                            <h6>International College of Arts and Science (PG)</h6>
+                                                            <span class="timeline-event-time me-1">2000-2003</span>
+                                                        </div>
+                                                        <p>Msc Computer Science</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="experience-fill" role="tabpanel" aria-labelledby="experience-tab-fill" aria-expanded="false">
+                                    <div class="card">
+                                        <h4 class="card-header">Experience Informations</h4>
+                                        <div class="card-body pt-1">
+                                            <ul class="timeline ms-50">
+                                                <li class="timeline-item">
+                                                    <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    <div class="timeline-event">
+                                                        <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                            <h6>Lead Software Developer</h6>
+                                                            <span class="timeline-event-time me-1">(5 years 2 months)</span>
+                                                        </div>
+                                                        <p>Jan 2016 - Present</p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item">
+                                                    <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    <div class="timeline-event">
+                                                        <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                            <h6>Software developer</h6>
+                                                            <span class="timeline-event-time me-1">(1 years 3 months)</span>
+                                                        </div>
+                                                        <p>Oct 2014 - Jan 2016</p>
+                                                    </div>
+                                                </li>
+                                                <li class="timeline-item">
+                                                    <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    <div class="timeline-event">
+                                                        <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                            <h6>Junior Developer</h6>
+                                                            <span class="timeline-event-time me-1">(8 months)</span>
+                                                        </div>
+                                                        <p>Jan 2014 - Sep 2014</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </section>
+                <!-- Dashboard Ecommerce ends -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUser" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
+            <div class="modal-content">
+                <div class="modal-header bg-transparent">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-5 px-sm-5 pt-50">
+                    <div class="text-center mb-2">
+                        <h1 class="mb-1">Edit Information</h1>
+                    </div>
+                    <form id="editUserForm" class="row gy-1 pt-75" onsubmit="return false">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="modalEditTaxID">Employee ID</label>
+                            <input type="text" id="modalEditTaxID" name="modalEditTaxID" class="form-control modal-edit-tax-id" placeholder="" value="100-1001" disabled/>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="modalEditUserStatus">Status</label>
+                            <select id="modalEditUserStatus" name="modalEditUserStatus" class="form-select" aria-label="Default select example" disabled>
+                                <option selected>Status</option>
+                                <option value="1" selected>Active</option>
+                                <option value="2">Inactive</option>
+                                <option value="3">Suspended</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label" for="modalEditUserFirstName">First Name</label>
+                            <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="" value="Mayank" data-msg="Please enter your first name" />
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label" for="modalEditUserMiddleName">Middle Name</label>
+                            <input type="text" id="modalEditUserMiddleName" name="modalEditUserMiddleName" class="form-control" placeholder="" value="Kumar" data-msg="Please enter your middle name" />
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label" for="modalEditUserLastName">Last Name</label>
+                            <input type="text" id="modalEditUserLastName" name="modalEditUserLastName" class="form-control" placeholder="" value="Sharma" data-msg="Please enter your last name" />
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="">Designation</label>
+                            <input type="text" id="modalEditUserDeignation" name="modalEditUserDeignation" class="form-control" placeholder="" value="Lead Software Developer" data-msg="Please enter your post" />
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="">Blood Group</label>
+                            <input type="text" id="modalEditUserBlood" name="modalEditUserBlood" class="form-control" placeholder="" value="O+" data-msg="Please enter your Blood Group" />
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="modalEditUserEmail">Email</label>
+                            <input type="text" id="modalEditUserEmail" name="modalEditUserEmail" class="form-control" value="mayank.sharma@alcyone.in" placeholder="example@domain.com" />
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="modalEditUserPhone">Contact</label>
+                            <input type="text" id="modalEditUserPhone" name="modalEditUserPhone" class="form-control phone-number-mask" placeholder="" value=" 8103561887" />
+                        </div>
+                        <div class="col-12 text-center mt-2 pt-50">
+                            <button type="submit" class="btn btn-primary me-1">Submit</button>
+                            <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Discard
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Edit User Modal -->
+
+
+
+    <script>
+        document.getElementById('editUserForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            var formData = new FormData(this); // Create FormData from form inputs
+    
+            // Send a POST request to update user information
+            fetch('/update-user-info/', {  // Adjust this URL based on your Django view URL
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // CSRF token for security
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message); // Show success message
+                    // Optionally close the modal
+                    var modal = bootstrap.Modal.getInstance(document.getElementById('editUser'));
+                    modal.hide();
+                } else {
+                    alert('Error: ' + data.message); // Show error message
+                }
+            })
+            .catch(error => console.error('Error:', error)); // Log any errors
+        });
+    </script>
+    
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+<!-- BEGIN: Vendor JS-->
+    <script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+<!-- END: Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/responsive.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/jszip.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/pdfmake.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/vfs_fonts.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/buttons.print.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/charts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/extensions/toastr.min.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.date.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js' %}"></script>
+
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+    <script src="{% static 'app-assets/js/core/app-menu.min.js' %}"></script>
+    <script src="{% static 'app-assets/js/core/app.min.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/customizer.min.js' %}"></script>
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+    <script src="{% static 'app-assets/js/scripts/pages/dashboard-ecommerce.min.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/charts/chart-apex.min.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/forms/pickers/form-pickers.min.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/tables/table-datatables-basic.min.js' %}"></script>
+<!-- END: Page JS-->
+
+    <script>
+        $(window).on('load', function() {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>
+
+
