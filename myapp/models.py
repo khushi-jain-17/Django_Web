@@ -2,24 +2,44 @@ from django.db import models
 
 
 class Profile(models.Model):
-    emp_id = models.CharField(max_length=10, unique=True)
-    name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    emp_id = models.CharField(max_length=10)
+    name = models.CharField(max_length=100, null=True)
+    email = models.EmailField(null=True)
     status = models.CharField(max_length=100, default='active')
-    role = models.CharField(max_length=200)
-    contact = models.CharField(max_length=15)
-    emergency_contact = models.CharField(max_length=20)
-    blood_group = models.CharField(max_length=5)
-    nationality = models.CharField(max_length=50)
-    religion = models.CharField(max_length=50)
-    marital_status = models.CharField(max_length=10)
-    address = models.TextField()
-    country = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    zipcode = models.CharField(max_length=15)
+    role = models.CharField(max_length=200, null=True)
+    contact = models.CharField(max_length=15, null=True)
+    emergency_contact = models.CharField(max_length=20, null=True)
+    blood_group = models.CharField(max_length=5, null=True)
+    nationality = models.CharField(max_length=50, null=True)
+    religion = models.CharField(max_length=50, null=True)
+    marital_status = models.CharField(max_length=10,null=True)
+    address = models.TextField(null=True)
+    country = models.CharField(max_length=50, null=True)
+    state = models.CharField(max_length=50, null=True)
+    zipcode = models.CharField(max_length=15, null=True)
 
     def __str__(self):
         return f"{self.name}"
 
 
 
+
+class BankInfo(models.Model):
+    bank_name = models.CharField(max_length=100)
+    account_number = models.CharField(max_length=20)
+    ifsc_code = models.CharField(max_length=20)
+    pan_no = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.account_number
+    
+
+
+class Education(models.Model):
+    institution_name = models.CharField(max_length=255)  
+    degree = models.CharField(max_length=255) 
+    start_year = models.IntegerField()  
+    end_year = models.IntegerField()  
+
+    def __str__(self):
+        return f"{self.institution_name} ({self.degree} - {self.start_year}-{self.end_year})"    

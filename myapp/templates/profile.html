@@ -398,9 +398,12 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title mb-50">Bank Informations</h4>
-                                            <button class="btn btn-primary btn-sm edit-address" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddressModal">
-                                        <span data-feather="edit-2"></span>
-                                    </button>
+                                            <a href="{% url 'bank_list' %}">
+                                                <button class="btn btn-primary btn-sm edit-address" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddressModal">All
+                                                <!-- <span data-feather="edit-2"></span> -->
+                                                </button> 
+                                            </a>                                               
+                                                      
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -529,6 +532,9 @@
                                         <div class="card-body pt-1">
                                             <ul class="timeline ms-50">
                                                 <li class="timeline-item">
+                                                    <a href="{% url 'education_detail' education.id %}" style="text-decoration: none;">
+                                                        <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                                                    </a>
                                                     <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
                                                     <div class="timeline-event">
                                                         <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
@@ -599,13 +605,11 @@
 
                 </section>
                 <!-- Dashboard Ecommerce ends -->
-
             </div>
         </div>
     </div>
     <!-- END: Content-->
 
-    <!-- Edit User Modal -->
     <div class="modal fade" id="editUser" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
@@ -616,15 +620,15 @@
                     <div class="text-center mb-2">
                         <h1 class="mb-1">Edit Information</h1>
                     </div>
-                    <form id="editUserForm" class="row gy-1 pt-75" onsubmit="return false">
+                    <form id="editUserForm" class="row gy-1 pt-75">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalEditTaxID">Employee ID</label>
-                            <input type="text" id="modalEditTaxID" name="modalEditTaxID" class="form-control modal-edit-tax-id" placeholder="" value="100-1001" disabled/>
+                            <input type="text" id="modalEditTaxID" name="modalEditTaxID" class="form-control" value="100-1001" disabled/>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalEditUserStatus">Status</label>
-                            <select id="modalEditUserStatus" name="modalEditUserStatus" class="form-select" aria-label="Default select example" disabled>
-                                <option selected>Status</option>
+                            <select id="modalEditUserStatus" name="modalEditUserStatus" class="form-select" disabled>
                                 <option value="1" selected>Active</option>
                                 <option value="2">Inactive</option>
                                 <option value="3">Suspended</option>
@@ -632,81 +636,108 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="modalEditUserFirstName">First Name</label>
-                            <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="" value="Mayank" data-msg="Please enter your first name" />
+                            <input type="text" id="modalEditUserFirstName" name="first_name" class="form-control" value="Mayank" required />
                         </div>
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="modalEditUserMiddleName">Middle Name</label>
-                            <input type="text" id="modalEditUserMiddleName" name="modalEditUserMiddleName" class="form-control" placeholder="" value="Kumar" data-msg="Please enter your middle name" />
+                            <input type="text" id="modalEditUserMiddleName" name="middle_name" class="form-control" value="Kumar" />
                         </div>
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="modalEditUserLastName">Last Name</label>
-                            <input type="text" id="modalEditUserLastName" name="modalEditUserLastName" class="form-control" placeholder="" value="Sharma" data-msg="Please enter your last name" />
+                            <input type="text" id="modalEditUserLastName" name="last_name" class="form-control" value="Sharma" required />
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="">Designation</label>
-                            <input type="text" id="modalEditUserDeignation" name="modalEditUserDeignation" class="form-control" placeholder="" value="Lead Software Developer" data-msg="Please enter your post" />
+                            <label class="form-label" for="modalEditUserDeignation">Designation</label>
+                            <input type="text" id="modalEditUserDeignation" name="designation" class="form-control" value="Lead Software Developer" />
                         </div>
-
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="">Blood Group</label>
-                            <input type="text" id="modalEditUserBlood" name="modalEditUserBlood" class="form-control" placeholder="" value="O+" data-msg="Please enter your Blood Group" />
+                            <label class="form-label" for="modalEditUserBlood">Blood Group</label>
+                            <input type="text" id="modalEditUserBlood" name="blood_group" class="form-control" value="O+" />
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalEditUserEmail">Email</label>
-                            <input type="text" id="modalEditUserEmail" name="modalEditUserEmail" class="form-control" value="mayank.sharma@alcyone.in" placeholder="example@domain.com" />
+                            <input type="email" id="modalEditUserEmail" name="email" class="form-control" value="mayank.sharma@alcyone.in" required />
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalEditUserPhone">Contact</label>
-                            <input type="text" id="modalEditUserPhone" name="modalEditUserPhone" class="form-control phone-number-mask" placeholder="" value=" 8103561887" />
+                            <input type="text" id="modalEditUserPhone" name="contact" class="form-control" value="8103561887" required />
                         </div>
                         <div class="col-12 text-center mt-2 pt-50">
                             <button type="submit" class="btn btn-primary me-1">Submit</button>
-                            <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                                Discard
-                            </button>
+                            <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Discard</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <!--/ Edit User Modal -->
 
-
-
+   
     <script>
-        document.getElementById('editUserForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('editUserForm');
     
-            var formData = new FormData(this); // Create FormData from form inputs
-    
-            // Send a POST request to update user information
-            fetch('/update-user-info/', {  // Adjust this URL based on your Django view URL
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // CSRF token for security
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json(); // Parse JSON response
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message); // Show success message
-                    // Optionally close the modal
-                    var modal = bootstrap.Modal.getInstance(document.getElementById('editUser'));
-                    modal.hide();
-                } else {
-                    alert('Error: ' + data.message); // Show error message
-                }
-            })
-            .catch(error => console.error('Error:', error)); // Log any errors
-        });
-    </script>
+    // Function to fetch and prepopulate the form
+    function fetchUserData(emp_id) {
+        fetch(`/get-user-info/${emp_id}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const user = data.updated_employee;
+                document.getElementById('modalEditTaxID').value = user.emp_id;
+                document.getElementById('modalEditUserFirstName').value = user.name.split(' ')[0];
+                document.getElementById('modalEditUserMiddleName').value = user.name.split(' ')[1] || '';
+                document.getElementById('modalEditUserLastName').value = user.name.split(' ')[2] || '';
+                document.getElementById('modalEditUserDeignation').value = user.role;
+                document.getElementById('modalEditUserBlood').value = user.blood_group;
+                document.getElementById('modalEditUserEmail').value = user.email;
+                document.getElementById('modalEditUserPhone').value = user.contact;
+            } else {
+                alert('Employee not found.');
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Submit form data
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const emp_id = document.getElementById('modalEditTaxID').value;
+        const updatedData = {
+            first_name: document.getElementById('modalEditUserFirstName').value,
+            middle_name: document.getElementById('modalEditUserMiddleName').value,
+            last_name: document.getElementById('modalEditUserLastName').value,
+            designation: document.getElementById('modalEditUserDeignation').value,
+            blood_group: document.getElementById('modalEditUserBlood').value,
+            email: document.getElementById('modalEditUserEmail').value,
+            contact: document.getElementById('modalEditUserPhone').value
+        };
+
+        // Update user data
+        fetch(`/update-user-info/${emp_id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('User information updated successfully!');
+                fetchUserData(emp_id); // Reload updated data
+            } else {
+                alert('Failed to update user: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => console.error('Error updating user:', error));
+    });
+});
+</script>
+
+       
     
 
     <div class="sidenav-overlay"></div>
@@ -766,5 +797,3 @@
 </body>
 
 </html>
-
-
