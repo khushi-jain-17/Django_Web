@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Bank Info</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Edit Bank Info</h1>
+
+    <!-- Form to edit bank info -->
+    <form id="edit-bank-form">
+        <label for="bank_name">Bank Name:</label>
+        <input type="text" id="bank_name" name="bank_name"><br><br>
+
+        <label for="account_number">Account Number:</label>
+        <input type="text" id="account_number" name="account_number"><br><br>
+
+        <label for="ifsc_code">IFSC Code:</label>
+        <input type="text" id="ifsc_code" name="ifsc_code"><br><br>
+
+        <label for="pan_no">PAN Number:</label>
+        <input type="text" id="pan_no" name="pan_no"><br><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="/bank/{{ bank.id }}/">Cancel</a>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch existing bank info (for editing)
+            $.ajax({
+                url: '/bank/{{ bank.id }}/edit/',  // Ensure bank.id is passed correctly
+                type: 'GET',
+                success: function (data) {
+                    // Populate form with existing bank data
+                    $('#bank_name').val(data.bank_name);
+                    $('#account_number').val(data.account_number);
+                    $('#ifsc_code').val(data.ifsc_code);
+                    $('#pan_no').val(data.pan_no);
+                },
+                error: function (xhr) {
+                    alert('Error loading bank info: ' + xhr.responseText);
+                }
+            });
+
+            // Submit the form using AJAX (PUT request)
+            $('#edit-bank-form').submit(function (e) {
+                e.preventDefault();
+
+                var bankData = {
+                    bank_name: $('#bank_name').val(),
+                    account_number: $('#account_number').val(),
+                    ifsc_code: $('#ifsc_code').val(),
+                    pan_no: $('#pan_no').val()
+                };
+
+                // Make an AJAX PUT request to update bank info
+                $.ajax({
+                    url: '/bank/{{ bank.id }}/edit/',  // Ensure bank.id is passed correctly
+                    type: 'PUT',
+                    data: JSON.stringify(bankData),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        alert('Bank info updated successfully!');
+                        window.location.href = '/bank/{{ bank.id }}/';  // Redirect to detail page after success
+                    },
+                    error: function (xhr) {
+                        alert('Error updating bank info: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

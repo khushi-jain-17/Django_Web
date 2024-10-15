@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banks</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Banks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Bank Name</th>
+                <th>Account Number</th>
+                <th>IFSC Code</th>
+                <th>PAN Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bank in banks %}
+            <tr>
+                <td><a href="{% url 'bank_detail' bank.id %}">{{ bank.id }}</a></td>
+                <td>{{ bank.bank_name }}</td>
+                <td>{{ bank.account_number }}</td>
+                <td>{{ bank.ifsc_code }}</td>
+                <td>{{ bank.pan_no }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'home' %}">Back</a><br>
+    <a href="{% url 'bank_create' %}">Create Bank</a><br>
+</body>
+</html>
