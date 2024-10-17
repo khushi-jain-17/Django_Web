@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Education</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+        .alert {
+            color: green;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create New education</h1>
+    <div id="notification" class="alert" style="display:none;"></div>
+    <input type="text" id="institution_name" placeholder="Institution Name" required>
+    <input type="text" id="degree" placeholder="Degree" required>
+    <input type="text" id="start_year" placeholder="Start year" required>
+    <input type="text" id="end_year" placeholder="End year" required>
+    
+    <button id="create-education-btn">Create education</button>
+    <a href="{% url 'education_list' %}">Back</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#create-education-btn').click(function(e) {
+                e.preventDefault();
+                
+                // Gather the input values
+                const educationData = {
+                    institution_name: $('#institution_name').val(),
+                    degree: $('#degree').val(),
+                    start_year: $('#start_year').val(),
+                    end_year: $('#end_year').val(),
+                };
+
+                // Send AJAX POST request to create the bank
+
+ 
+                $.ajax({
+                    url: '/education/create/',  // Adjust this URL according to your URL configuration
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',           
+                        institution_name: $('#institution_name').val(),
+                        degree: $('#degree').val(),
+                        start_year: $('#start_year').val(),
+                        end_year: $('#end_year').val(), // Include CSRF token
+                    },
+                    success: function(response) {
+                        $('#notification').text('education created successfully.').show();
+                        // Optionally clear the input fields
+                        $('#institution_name').val('');
+                        $('#degree').val('');
+                        $('#start_year').val('');
+                        $('#end_year').val('');
+                    },
+                    error: function(xhr) {
+                        $('#notification').text('Error creating education: ' + xhr.responseText).show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

@@ -38,8 +38,23 @@ class BankInfo(models.Model):
 class Education(models.Model):
     institution_name = models.CharField(max_length=255)  
     degree = models.CharField(max_length=255) 
-    start_year = models.IntegerField()  
+    start_year = models.IntegerField()   
     end_year = models.IntegerField()  
 
     def __str__(self):
-        return f"{self.institution_name} ({self.degree} - {self.start_year}-{self.end_year})"    
+        return self.institution_name    
+    
+
+
+class Experience(models.Model):
+    title = models.CharField(max_length=255) 
+    start_date = models.CharField(null=True)               
+    end_date = models.CharField(null=True, blank=True) 
+    duration = models.TextField(null=True) 
+
+    def __str__(self):
+        return self.title
+    
+    
+   
+

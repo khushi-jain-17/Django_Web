@@ -20,8 +20,19 @@ urlpatterns = [
    path('bank/<int:id>/edit/', views.edit_bank, name='edit_bank'),
    path('bank/<int:id>/delete/', views.delete_bank, name='delete_bank'),
 
+   path('education/', views.education_list, name='education_list'),
    path('education/<int:id>/', views.education_detail, name='education_detail'),
+   path('education/<int:id>/edit/', views.education_edit, name='education_edit'),
+   path('education/<int:id>/delete/', views.delete_education, name='delete_education'),
+   path('education/create/', views.education_create, name='education_create'),
+
+   # path('experience/', views.experience_list, name='education_list'),
+   # path('experience/<int:id>/', views.experience_detail, name='experience_detail'),
+   # path('experience/create/', views.experience_create, name='experience_create'),
+   # path('experience/<int:id>/edit/', views.experience_edit, name='experience_edit'),
+   # path('experience/<int:id>/delete/', views.delete_experience, name='delete_experience'),
    
+
 ]
 
 

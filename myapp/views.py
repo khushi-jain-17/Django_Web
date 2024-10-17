@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, BankInfo, Education
+from .models import Profile, BankInfo, Education, Experience
 import json
+
+
 
 
 def holiday_page(request):
@@ -11,6 +13,8 @@ def holiday_page(request):
 
 
 def profile(request):
+    # educations = Education.objects.all()  # Ensure this queryset returns objects with valid IDs
+    # return render(request, 'profile.html', {'educations': educations})
     return render(request, 'profile.html')
 
 
@@ -88,7 +92,6 @@ def update_user(request, id):
 
 
 def bank_list(request):
-    # Fetch all banks from the database
     banks = BankInfo.objects.all()
     return render(request, 'bank_list.html', {'banks': banks})
 
@@ -105,7 +108,6 @@ def bank_create(request):
         ifsc_code = request.POST.get('ifsc_code')
         pan_no = request.POST.get('pan_no')
 
-        # Create the bank record
         bank = BankInfo.objects.create(
             bank_name=bank_name,
             account_number=account_number,
@@ -151,19 +153,134 @@ def delete_bank(request, id):
  
 
 
+
+@csrf_exempt
+def education_list(request):
+    educations = Education.objects.all()
+    return render(request, 'education_list.html', {'educations': educations})
+
+
+
 def education_detail(request, id):
     education = get_object_or_404(Education, id=id)
     return render(request, 'education_detail.html', {'education': education})
 
 
+@csrf_exempt 
+def education_edit(request, id):
+    if request.method == 'GET':
+        education = get_object_or_404(Education, id=id)
+        return render(request, 'education_edit.html', {'education': education})
+    
+    if request.method == 'PUT':  
+        data = json.loads(request.body)
+        try:
+            education = Education.objects.get(id=id)
+            education.institution_name = data.get('institution_name')
+            education.degree = data.get('degree')
+            education.start_year = data.get('start_year')
+            education.end_year = data.get('end_year')
+            education.save()
+            return JsonResponse({'message': 'Education updated successfully!'}, status=200)
+        except Education.DoesNotExist:
+            return JsonResponse({'error': 'Education not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+    
+
+def education_create(request):
+    if request.method == 'POST':
+        institution_name = request.POST.get('institution_name')
+        degree = request.POST.get('degree')
+        start_year = request.POST.get('start_year')
+        end_year = request.POST.get('end_year')
+
+        education = Education.objects.create(
+            institution_name=institution_name,
+            degree=degree,
+            start_year=start_year,
+            end_year=end_year
+        ) 
+        return JsonResponse({'success': True})  
+    return render(request, 'education_create.html')
+
+
+@csrf_exempt 
+def delete_education(request, id):
+    if request.method == 'DELETE':
+        try:
+            education = get_object_or_404(Education, id=id)
+            education.delete()
+            return JsonResponse({'success': True})
+        except Education.DoesNotExist:
+            return JsonResponse({'error': 'Education not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+ 
 
 
 
 
 
+# def experience_list(request):
+#     experiences = Experience.objects.all()
+#     return render(request, 'experience_list.html', {'experiences': experiences})
 
 
+# def experience_detail(request, id):
+#     experience = get_object_or_404(Experience, id=id)
+#     return render(request, 'experience_detail.html', {'experience':experience})
 
+
+# def experience_create(request):
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         start_date = request.POST.get('start_date')
+#         end_date = request.POST.get('end_date')
+#         duration = request.POST.get('duration')
+
+#         experience = Experience.objects.create(
+#             title=title,
+#             start_date=start_date,
+#             end_date=end_date,
+#             duration=duration
+#         ) 
+#         return JsonResponse({'success': True})  
+#     return render(request, 'experience_create.html')
+    
+
+# @csrf_exempt  
+# def experience_edit(request, id):
+#     if request.method == 'GET':
+#         experience = get_object_or_404(Experience, id=id)
+#         return render(request, 'experience_edit.html', {'experience': experience})
+    
+#     if request.method == 'PUT':  
+#         data = json.loads(request.body)
+#         try:
+#             experience = Experience.objects.get(id=id)
+#             experience.title = data.get('title')
+#             experience.start_date = data.get('start_date')
+#             experience.end_date = data.get('end_date')
+#             experience.duration = data.get('duration')
+#             experience.save()
+#             return JsonResponse({'message': 'Experience info updated successfully!'}, status=200)
+#         except Experience.DoesNotExist:
+#             return JsonResponse({'error': 'experience not found'}, status=404)
+#     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+   
+# @csrf_exempt 
+# def delete_experience(request, id):
+#     if request.method == 'DELETE':
+#         try:
+#             experience = get_object_or_404(Experience, id=id)
+#             experience.delete()
+#             return JsonResponse({'success': True})
+#         except Experience.DoesNotExist:
+#             return JsonResponse({'error': 'experience not found'}, status=404)
+#     else:
+#         return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 
@@ -181,7 +298,6 @@ def education_detail(request, id):
 #         bank_info.save()
 #         return redirect('bank_info')  # Redirect to the list or detail page after updating
 #     return HttpResponse("Invalid Request")
-
 
 
 # @csrf_exempt 
@@ -221,8 +337,6 @@ def education_detail(request, id):
 #         profile.save() 
 #         return JsonResponse({'status': 'success', 'message': 'User information updated successfully!'})
         
-
-
 
 # @csrf_exempt
 # def update_user(request, id):

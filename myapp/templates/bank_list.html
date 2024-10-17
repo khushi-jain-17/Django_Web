@@ -21,8 +21,11 @@
             background-color: #f2f2f2;
         }
     </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+
     <h1>Banks</h1>
     <table>
         <thead>
@@ -32,21 +35,74 @@
                 <th>Account Number</th>
                 <th>IFSC Code</th>
                 <th>PAN Number</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for bank in banks %}
             <tr>
-                <td><a href="{% url 'bank_detail' bank.id %}">{{ bank.id }}</a></td>
+                <td>{{ bank.id }}</td>
                 <td>{{ bank.bank_name }}</td>
                 <td>{{ bank.account_number }}</td>
                 <td>{{ bank.ifsc_code }}</td>
                 <td>{{ bank.pan_no }}</td>
+                <td><a href="{% url 'bank_detail' bank.id %}">View</a>
+                     <a href="{% url 'edit_bank' bank.id %}">Update</a>
+                     <!-- <a href="#" id="delete-bank" data-id="{{ bank.id }}">Delete</a> -->
+                     <a href="#" class="delete-bank" data-id="{{ bank.id }}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <a href="{% url 'home' %}">Back</a><br>
     <a href="{% url 'bank_create' %}">Create Bank</a><br>
+
+    <script>
+    function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        // Confirmation pop-up for deletion
+        $(document).ready(function() {
+            $('.delete-bank').click(function(e) {
+                e.preventDefault();
+
+                var bankId = $(this).data('id');
+                var confirmDelete = confirm('Are you sure you want to delete this bank info?');
+
+                if (confirmDelete) {
+                    // Send DELETE request via AJAX
+                    $.ajax({
+                        url: '/bank/' + bankId + '/delete/',
+                        type: 'DELETE',
+                        beforeSend: function(xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        },
+                        success: function(response) {
+                            alert('Bank info deleted successfully.');
+                            window.location.href = '/banks/';  // Redirect to bank list page after deletion
+                        },
+                        error: function(xhr) {
+                            alert('Error deleting bank info: ' + xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+</script>
 </body>
 </html>
