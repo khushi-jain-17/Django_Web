@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
                 <th>Title</th>
                 <th>Start date</th>
                 <th>End date</th>
-                <th>duration</th>
+                <th>Duration</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -44,10 +44,10 @@
                 <td>{{ experience.start_date }}</td>
                 <td>{{ experience.end_date }}</td>
                 <td>{{ experience.duration }}</td>
-                <td><a href="{% url 'experience_detail' education.id %}">View</a>
-                    <a href="{% url 'experience_edit' education.id %}">Update</a>
+                <td><a href="{% url 'experience_detail' experience.id %}">View</a>
+                    <a href="{% url 'experience_edit' experience.id %}">Update</a>
                      <!-- <a href="#" id="delete-bank" data-id="{{ education.id }}">Delete</a> -->
-                    <!-- <a href="#" class="delete-experience" data-id="{{ education.id }}">Delete</a>
+                     <a href="#" class="delete-experience" data-id="{{ experience.id }}">Delete</a>
 
                 </td>    
             </tr>
@@ -106,4 +106,7 @@
         });
 </script>
 </body>
-</html> --> -->
+</html> 
+
+
+

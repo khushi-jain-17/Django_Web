@@ -26,14 +26,21 @@ urlpatterns = [
    path('education/<int:id>/delete/', views.delete_education, name='delete_education'),
    path('education/create/', views.education_create, name='education_create'),
 
-   # path('experience/', views.experience_list, name='education_list'),
-   # path('experience/<int:id>/', views.experience_detail, name='experience_detail'),
-   # path('experience/create/', views.experience_create, name='experience_create'),
-   # path('experience/<int:id>/edit/', views.experience_edit, name='experience_edit'),
-   # path('experience/<int:id>/delete/', views.delete_experience, name='delete_experience'),
+   path('experience/', views.experience_list, name='experience_list'),
+   path('experience/<int:id>/', views.experience_detail, name='experience_detail'),
+   path('experience/create/', views.experience_create, name='experience_create'),
+   path('experience/<int:id>/edit/', views.experience_edit, name='experience_edit'),
+   path('experience/<int:id>/delete/', views.delete_experience, name='delete_experience'),
+
+   path('edit/pi/', views.personal_detail, name='edit_pi'),
+   path('edit/info/', views.edit_personalinfo, name='edit_personalinfo'),
+
    
+   path('contact/detail/', views.contact_detail, name='contact_detail'),
+   path('edit/contact/', views.edit_contact, name='edit_contact'),
 
 ]
+
 
 
 

@@ -63,6 +63,7 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    
     <!-- END: Custom CSS-->
 
 </head>
@@ -238,18 +239,7 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="{% url 'holiday' %}"><i
                             data-feather="sun"></i><span class="menu-title text-truncate">Holidays</span></a>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
-                            data-feather="credit-card"></i><span class="menu-title text-truncate">Payroll</span></a>
-                    <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="payslip.html"><i
-                                    data-feather="file-text"></i><span
-                                    class="menu-item text-truncate">Payslip</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center" href="#"><i data-feather="file"></i><span
-                                    class="menu-item text-truncate">Salary</span></a>
-                        </li>
-                    </ul>
-                </li>
+                
             </ul>
         </div>
     </div>
@@ -344,13 +334,7 @@
                                         <span class="fw-bold">Bank Info</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="leaves-tab-fill" data-bs-toggle="pill" href="#leaves-fill"
-                                        aria-expanded="false">
-                                        <i data-feather="sun" class="font-medium-3 me-50"></i>
-                                        <span class="fw-bold">Leaves</span>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a class="nav-link" id="education-tab-fill" data-bs-toggle="pill"
                                         href="#education-fill" aria-expanded="false">
@@ -373,14 +357,17 @@
 
                                     <!-- Personal Informations -->
                                     <div class="card">
-                                        <div class="card-header">
+                                        <div class="card-header">   
                                             <h4 class="card-title mb-50">Personal Informations</h4>
+                                            <a href="{% url 'edit_pi' %}">
                                             <button class="btn btn-primary btn-sm edit-address" type="button"
                                                 data-bs-toggle="modal" data-bs-target="#addNewAddressModal">
                                                 <span data-feather="edit-2"></span>
                                             </button>
+                                            </a>
+                                            
                                         </div>
-                                        <div class="card-body">
+                                        <!-- <div class="card-body">
                                             <div class="row">
                                                 <div class="col-xl-7 col-12">
                                                     <dl class="row mb-0">
@@ -414,18 +401,58 @@
                                                     </dl>
                                                 </div>
                                             </div>
+                                        </div> -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-7 col-12">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Nationality:</dt>
+                                                        <dd class="col-sm-8 mb-1">Indian</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Religion:</dt>
+                                                        <dd class="col-sm-8 mb-1">Hindu</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Marital status:</dt>
+                                                        <dd class="col-sm-8 mb-1">Married</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Address:</dt>
+                                                        <dd class="col-sm-8 mb-1">Shekhar central, 813, New Palasia, Indore, Madhya Pradesh</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xl-5 col-12">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
+                                                        <dd class="col-sm-8 mb-1">8103561887</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
+                                                        <dd class="col-sm-8 mb-1">India</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
+                                                        <dd class="col-sm-8 mb-1">Madhya Pradesh</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
+                                                        <dd class="col-sm-8 mb-1">452001</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
+
+
                                     <!--/ Personal Informations -->
                                     <!-- Emergency Contact -->
                                     <div class="card">
                                         <div class="card-header">
                                             <h4 class="card-title mb-50">Emergency Contact</h4>
+                                            <a href="{% url 'contact_detail' %}">
                                             <button class="btn btn-primary btn-sm edit-address" type="button"
                                                 data-bs-toggle="modal" data-bs-target="#addNewAddressModal"><span
-                                                    data-feather="edit-2"></span></button>
+                                                    data-feather="edit-2"></span>
+                                            </button>
+                                            </a>
                                         </div>
-                                        <div class="card-body">
+                                        <!-- <div class="card-body">
                                             <div class="row">
                                                 <div class="col-xl-6 col-12">
                                                     <h6 class="pb-1 text-secondary">Primary</h6>
@@ -454,7 +481,38 @@
                                                     </dl>
                                                 </div>
                                             </div>
+                                        </div> -->
+                                        <div class="card-body">
+                                            <div class="row" id="contact-info">
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Primary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="primary-name"></dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="primary-relationship"></dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="primary-phone"></dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Secondary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-name"></dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-relationship"></dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-phone"></dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                     <!--/ Emergency Contact -->
                                 </div>
@@ -613,7 +671,6 @@
                                                 <!-- <span data-feather="edit-2"></span> -->
                                             </button>
                                             </a>
-                                            
                                         </div>
                                         <div class="card-body pt-1">
                                             <ul class="timeline ms-50">
@@ -649,14 +706,16 @@
                                 <div class="tab-pane" id="experience-fill" role="tabpanel"
                                     aria-labelledby="experience-tab-fill" aria-expanded="false">
                                     <div class="card">
-
-                                        <h4 class="card-header">Experience Informations</h4>
-                                        <a href="{% url 'education_list' %}">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-50">Experience Informations</h4>
+                                            <a href="{% url 'experience_list' %}">
                                             <button class="btn btn-primary btn-sm edit-address" type="button"
                                                 data-bs-toggle="modal" data-bs-target="#addNewAddressModal">View
                                                 <!-- <span data-feather="edit-2"></span> -->
                                             </button>
-                                        </a>
+                                            </a>
+                                        </div>
+
                                         <div class="card-body pt-1">
                                             <ul class="timeline ms-50">
                                                 <li class="timeline-item">
@@ -848,6 +907,8 @@
                     .catch(error => console.error('Error updating user:', error));
             });
         });
+
+       
     </script>
 
 
@@ -902,6 +963,48 @@
                 });
             }
         });
+
+        $(document).ready(function() {
+        // Retrieve data from local storage
+        const storedData = localStorage.getItem('personalInfo');
+
+        // If data exists, update the page with it
+        if (storedData) {
+            const personalInfo = JSON.parse(storedData);
+
+            // Update the profile information on the page
+            $('dd:contains("Indian")').text(personalInfo.nationality);
+            $('dd:contains("Hindu")').text(personalInfo.religion);
+            $('dd:contains("Married")').text(personalInfo.marital_status);
+            $('dd:contains("Shekhar central")').text(personalInfo.address);
+            $('dd:contains("8103561887")').text(personalInfo.contact);
+            $('dd:contains("India")').text(personalInfo.country);
+            $('dd:contains("Madhya Pradesh")').text(personalInfo.state);
+            $('dd:contains("452001")').text(personalInfo.zipcode);
+        }
+        
+    });
+    $(document).ready(function() {
+    // Retrieve contact info from localStorage
+    const contactInfo = JSON.parse(localStorage.getItem('contactInfo'));
+
+    // Check if contact info exists
+    if (contactInfo) {
+        // Populate primary contact information
+        $('#primary-name').text(contactInfo.primary.name);
+        $('#primary-relationship').text(contactInfo.primary.relationship);
+        $('#primary-phone').text(contactInfo.primary.phone);
+
+        // Populate secondary contact information
+        $('#secondary-name').text(contactInfo.secondary.name);
+        $('#secondary-relationship').text(contactInfo.secondary.relationship);
+        $('#secondary-phone').text(contactInfo.secondary.phone);
+    } else {
+        // Optionally handle the case where there is no contact info
+        console.log("No contact information found in localStorage.");
+    }
+});
+        
     </script>
 
 

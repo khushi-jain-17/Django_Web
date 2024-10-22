@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, BankInfo, Education, Experience
+from .models import Profile, BankInfo, Education, Experience, PersonalInfo, Contact
 import json
 
 
@@ -13,9 +13,12 @@ def holiday_page(request):
 
 
 def profile(request):
-    # educations = Education.objects.all()  # Ensure this queryset returns objects with valid IDs
-    # return render(request, 'profile.html', {'educations': educations})
     return render(request, 'profile.html')
+
+
+# def profile(request):
+#     user_id = request.user.id  # Example for getting the user's ID
+#     return render(request, 'profile.html', {'id': user_id})
 
 
 def dashboard(request):
@@ -98,8 +101,14 @@ def bank_list(request):
 
 def bank_detail(request, id):
     bank = get_object_or_404(BankInfo, id=id)
+    print(bank)
     return render(request, 'bank_detail.html', {'bank':bank})
 
+# def edit_bank(request, bank_id):
+#     bank = get_object_or_404(BankInfo, id=bank_id)
+
+#     if request.method == "GET":
+#         return render(request, 'edit_bank.html', {'bank': bank})
 
 def bank_create(request):
     if request.method == 'POST':
@@ -118,13 +127,33 @@ def bank_create(request):
     return render(request, 'bank_create.html')
     
 
-@csrf_exempt  
+# @csrf_exempt  
+# def edit_bank(request, id):
+#     if request.method == 'GET':
+#         bank = get_object_or_404(BankInfo, id=id)
+#         return render(request, 'bank_edit.html', {'bank': bank})
+    
+#     if request.method == 'PUT':  
+#         data = json.loads(request.body)
+#         try:
+#             bank = BankInfo.objects.get(id=id)
+#             bank.bank_name = data.get('bank_name')
+#             bank.account_number = data.get('account_number')
+#             bank.ifsc_code = data.get('ifsc_code')
+#             bank.pan_no = data.get('pan_no')
+#             bank.save()
+#             return JsonResponse({'message': 'Bank info updated successfully!'}, status=200)
+#         except BankInfo.DoesNotExist:
+#             return JsonResponse({'error': 'Bank not found'}, status=404)
+#     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
 def edit_bank(request, id):
     if request.method == 'GET':
         bank = get_object_or_404(BankInfo, id=id)
         return render(request, 'bank_edit.html', {'bank': bank})
-    
-    if request.method == 'PUT':  
+
+    if request.method == 'PUT':
         data = json.loads(request.body)
         try:
             bank = BankInfo.objects.get(id=id)
@@ -136,6 +165,7 @@ def edit_bank(request, id):
             return JsonResponse({'message': 'Bank info updated successfully!'}, status=200)
         except BankInfo.DoesNotExist:
             return JsonResponse({'error': 'Bank not found'}, status=404)
+    
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
    
@@ -222,67 +252,165 @@ def delete_education(request, id):
 
 
 
-# def experience_list(request):
-#     experiences = Experience.objects.all()
-#     return render(request, 'experience_list.html', {'experiences': experiences})
+def experience_list(request):
+    experiences = Experience.objects.all()
+    return render(request, 'experience_list.html', {'experiences': experiences})
 
 
-# def experience_detail(request, id):
-#     experience = get_object_or_404(Experience, id=id)
-#     return render(request, 'experience_detail.html', {'experience':experience})
+def experience_detail(request, id):
+    experience = get_object_or_404(Experience, id=id)
+    return render(request, 'experience_detail.html', {'experience':experience})
 
 
-# def experience_create(request):
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         start_date = request.POST.get('start_date')
-#         end_date = request.POST.get('end_date')
-#         duration = request.POST.get('duration')
+def experience_create(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        duration = request.POST.get('duration')
 
-#         experience = Experience.objects.create(
-#             title=title,
-#             start_date=start_date,
-#             end_date=end_date,
-#             duration=duration
-#         ) 
-#         return JsonResponse({'success': True})  
-#     return render(request, 'experience_create.html')
+        experience = Experience.objects.create(
+            title=title,
+            start_date=start_date,
+            end_date=end_date,
+            duration=duration
+        ) 
+        return JsonResponse({'success': True})  
+    return render(request, 'experience_create.html')
     
 
-# @csrf_exempt  
-# def experience_edit(request, id):
-#     if request.method == 'GET':
-#         experience = get_object_or_404(Experience, id=id)
-#         return render(request, 'experience_edit.html', {'experience': experience})
+@csrf_exempt  
+def experience_edit(request, id):
+    if request.method == 'GET':
+        experience = get_object_or_404(Experience, id=id)
+        return render(request, 'experience_edit.html', {'experience': experience})
     
-#     if request.method == 'PUT':  
-#         data = json.loads(request.body)
-#         try:
-#             experience = Experience.objects.get(id=id)
-#             experience.title = data.get('title')
-#             experience.start_date = data.get('start_date')
-#             experience.end_date = data.get('end_date')
-#             experience.duration = data.get('duration')
-#             experience.save()
-#             return JsonResponse({'message': 'Experience info updated successfully!'}, status=200)
-#         except Experience.DoesNotExist:
-#             return JsonResponse({'error': 'experience not found'}, status=404)
-#     return JsonResponse({'error': 'Invalid request'}, status=400)
+    if request.method == 'PUT':  
+        data = json.loads(request.body)
+        try:
+            experience = Experience.objects.get(id=id)
+            experience.title = data.get('title')
+            experience.start_date = data.get('start_date')
+            experience.end_date = data.get('end_date')
+            experience.duration = data.get('duration')
+            experience.save()
+            return JsonResponse({'message': 'Experience info updated successfully!'}, status=200)
+        except Experience.DoesNotExist:
+            return JsonResponse({'error': 'experience not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
    
-# @csrf_exempt 
-# def delete_experience(request, id):
-#     if request.method == 'DELETE':
-#         try:
-#             experience = get_object_or_404(Experience, id=id)
-#             experience.delete()
-#             return JsonResponse({'success': True})
-#         except Experience.DoesNotExist:
-#             return JsonResponse({'error': 'experience not found'}, status=404)
-#     else:
-#         return JsonResponse({'error': 'Invalid request'}, status=400)
+@csrf_exempt 
+def delete_experience(request, id):
+    if request.method == 'DELETE':
+        try:
+            experience = get_object_or_404(Experience, id=id)
+            experience.delete()
+            return JsonResponse({'success': True})
+        except Experience.DoesNotExist:
+            return JsonResponse({'error': 'experience not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
+@csrf_exempt 
+def edit_personalinfo(request):
+    if request.method == 'GET':
+        personal = get_object_or_404(PersonalInfo, id=id)
+        print(personal)
+        return render(request, 'edit_pi.html', {'personal': personal})
+
+    if request.method == 'POST':
+        return JsonResponse({'message': 'Personal info updated successfully!'}, status=200)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@csrf_exempt 
+def personal_detail(request):
+    return render(request, 'edit_pi.html' )
+
+
+@csrf_exempt 
+def edit_contact(request):
+    if request.method == 'GET':
+        contact = get_object_or_404(Contact, id=id)
+        print(contact)
+        return render(request, 'contact_edit.html', {'contact': contact})
+
+    if request.method == 'POST':
+        return JsonResponse({'message': 'contact updated successfully!'}, status=200)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+@csrf_exempt 
+def contact_detail(request):
+    return render(request, 'contact_edit.html' )
+
+
+
+
+
+# @csrf_exempt
+# def edit_personalinfo(request):
+#     if request.method == 'PUT':
+#         nationality = request.POST.get('nationality')
+#         religion = request.POST.get('religion')
+#         marital_status = request.POST.get('marital_status')
+#         address = request.POST.get('address')
+#         contact = request.POST.get('contact')
+#         country = request.POST.get('country')
+#         state = request.POST.get('state')
+#         zipcode = request.POST.get('zipcode')
+
+#         personal_info = PersonalInfo(
+#             nationality=nationality,
+#             religion=religion,
+#             marital_status=marital_status,
+#             address=address,
+#             contact=contact,
+#             country=country,
+#             state=state,
+#             zipcode=zipcode
+#         )
+#         personal_info.save()
+#         return JsonResponse({'status': 'success', 'message': 'Information updated successfully!'})
+         
+
+
+
+# def personal_detail(request, id):
+#     personal = get_object_or_404(PersonalInfo, id=id)
+#     print(personal)
+    # return render(request, 'personal_detail.html', {'personal':personal})
+
+
+# @csrf_exempt
+# def update_profile(request):
+#     if request.method == "POST":
+#         # Get the data from the request
+#         nationality = request.POST.get('nationality')
+#         religion = request.POST.get('religion')
+#         marital_status = request.POST.get('marital_status')
+#         address = request.POST.get('address')
+#         contact = request.POST.get('contact')
+#         country = request.POST.get('country')
+#         state = request.POST.get('state')
+#         zipcode = request.POST.get('zipcode')
+
+#         # Update the user's personal information
+#         personal_info = PersonalInformation.objects.get(user=request.user)  # Adjust based on your user model
+#         personal_info.nationality = nationality
+#         personal_info.religion = religion
+#         personal_info.marital_status = marital_status
+#         personal_info.address = address
+#         personal_info.contact = contact
+#         personal_info.country = country
+#         personal_info.state = state
+#         personal_info.zipcode = zipcode
+#         personal_info.save()
+
+#         return JsonResponse({"message": "Profile updated successfully"})
+#     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
 

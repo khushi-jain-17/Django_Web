@@ -58,3 +58,27 @@ class Experience(models.Model):
     
    
 
+class PersonalInfo(models.Model):
+    nationality = models.CharField(max_length=255)
+    religion = models.CharField(max_length=255)
+    marital_status = models.CharField(max_length=50)  
+    address = models.TextField()
+    contact = models.CharField(max_length=15) 
+    country = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    zipcode = models.CharField(max_length=10)  
+
+    def __str__(self):
+        return self.nationality
+
+ 
+
+class Contact(models.Model):
+    primary_name = models.CharField(max_length=100)
+    primary_relationship = models.CharField(max_length=100)
+    primary_phone = models.CharField(max_length=15)
+    
+    secondary_name = models.CharField(max_length=100, blank=True, null=True)
+    secondary_relationship = models.CharField(max_length=100, blank=True, null=True)
+    secondary_phone = models.CharField(max_length=15, blank=True, null=True) 
+

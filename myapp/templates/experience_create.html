@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Experience</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+        .alert {
+            color: green;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create New experience</h1>
+    <div id="notification" class="alert" style="display:none;"></div>
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="text" id="start_date" placeholder="Start date" required>
+    <input type="text" id="end_date" placeholder="End date" required>
+    <input type="text" id="duration" placeholder="Duration" required>
+    
+    <button id="create-experience-btn">Create experience</button>
+    <a href="{% url 'experience_list' %}">Back</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#create-experience-btn').click(function(e) {
+                e.preventDefault();
+                
+                // Gather the input values
+                const experienceData = {
+                    title: $('#title').val(),
+                    start_date: $('#start_date').val(),
+                    end_date: $('#end_date').val(),
+                    duration: $('#duration').val(),
+                };
+
+                // Send AJAX POST request to create the bank
+
+ 
+                $.ajax({
+                    url: '/experience/create/',  // Adjust this URL according to your URL configuration
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',           
+                        title: $('#title').val(),
+                        start_date: $('#start_date').val(),
+                        end_date: $('#end_date').val(),
+                        duration: $('#duration').val(), // Include CSRF token
+                    },
+                    success: function(response) {
+                        $('#notification').text('education created successfully.').show();
+                        // Optionally clear the input fields
+                        $('#title').val('');
+                        $('#start_date').val('');
+                        $('#end_date').val('');
+                        $('#duration').val('');
+                    },
+                    error: function(xhr) {
+                        $('#notification').text('Error creating experience: ' + xhr.responseText).show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
