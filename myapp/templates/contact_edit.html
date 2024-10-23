@@ -66,113 +66,118 @@
     <!-- END: Custom CSS-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-    
-        
-        <!-- Edit Address Modal -->
-        <div class="" id="addNewAddressModal" tabindex="-1" aria-labelledby="addNewAddressModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addNewAddressModalLabel">Edit Emergency Contact</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="edit-info-form">
-                            <div class="mb-3">
-                                <label for="primary_name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="primary_name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="primary_relationship" class="form-label">Relationship</label>
-                                <input type="text" class="form-control" id="primary_relationship" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="primary_phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="primary_phone" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="secondary_name" class="form-label">Name</label>
-                                <textarea class="form-control" id="secondary_name" rows="3" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="secondary_relationship" class="form-label">Relationship</label>
-                                <input type="text" class="form-control" id="secondary_relationship" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="secondary_phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="secondary_phone" required>
-                            </div>
-                           
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </form>
-                    </div>
+
+
+    <!-- Edit Address Modal -->
+    <div class="" id="addNewAddressModal" tabindex="-1" aria-labelledby="addNewAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNewAddressModalLabel">Edit Emergency Contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-info-form">
+                        <div class="mb-3">
+                            <label for="primary_name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="primary_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="primary_relationship" class="form-label">Relationship</label>
+                            <input type="text" class="form-control" id="primary_relationship" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="primary_phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="primary_phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="secondary_name" class="form-label">Name</label>
+                            <textarea class="form-control" id="secondary_name" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="secondary_relationship" class="form-label">Relationship</label>
+                            <input type="text" class="form-control" id="secondary_relationship" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="secondary_phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="secondary_phone" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>
-   
-        <script>
-            $(document).ready(function() {
-                // Populate the modal with existing data
-                $('.edit-address').click(function() {
-                    $('#primary_name').val($('dd:contains("Name:")').next().text());
-                    $('#primary_relationship').val($('dd:contains("Relationship:")').next().text());
-                    $('#primary_phone').val($('dd:contains("Phone:")').next().text());
-                    $('#secondary_name').val($('dd:contains("Name:")').next().text());
-                    $('#secondary_relationship').val($('dd:contains("Relationship:")').next().text());
-                    $('#secondary_phone').val($('dd:contains("Phone:")').next().text());
-                });
-        
-                // Handle form submission
-                $('#edit-info-form').submit(function(e) {
-                    e.preventDefault();
-        
-                    const updatedData = {
-                        nationality: $('#primary_name').val(),
-                        religion: $('#primary_relationship').val(),
-                        marital_status: $('#primary_phone').val(),
-                        address: $('#secondary_name').val(),
-                        contact: $('#secondary_relationship').val(),
-                        country: $('#secondary_phone').val(),
-                    };
-        
-                    console.log("Submitted Data:", updatedData);  // Log submitted data
-                    localStorage.setItem('contactInfo', JSON.stringify(updatedData));
+    </div>
 
-        
-                    $.ajax({
-                        url: '/edit/contact/',  // Adjust this URL according to your backend setup
-                        type: 'POST',  // Change to POST
-                        data: JSON.stringify(updatedData),  // Send data as JSON
-                        contentType: 'application/json',  // Set content type to JSON
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');  // Include CSRF token
-                        },
-                        success: function(response) {
-                            // Update the profile information on the page
-                            $('dd:contains("Name:")').next().text(updatedData.primary_name);
-                            $('dd:contains("Relationship:")').next().text(updatedData.primary_relationship);
-                            $('dd:contains("Phone:")').next().text(updatedData.primary_phone);
-                            $('dd:contains("Name:")').next().text(updatedData.secondary_name);
-                            $('dd:contains("Relationship:")').next().text(updatedData.secondary_relationship);
-                            $('dd:contains("Phone:")').next().text(updatedData.secondary_phone);
-                     
-        
+    <script>
+        $(document).ready(function () {
+            // Populate the modal with existing data
+            $('.edit-address').click(function () {
+                $('#primary_name').val($('dd:contains("Name:")').next().text());
+                $('#primary_relationship').val($('dd:contains("Relationship:")').next().text());
+                $('#primary_phone').val($('dd:contains("Phone:")').next().text());
+                $('#secondary_name').val($('dd:contains("Name:")').next().text());
+                $('#secondary_relationship').val($('dd:contains("Relationship:")').next().text());
+                $('#secondary_phone').val($('dd:contains("Phone:")').next().text());
+            });
+
+            // Handle form submission
+            $('#edit-info-form').submit(function (e) {
+                e.preventDefault();
+
+                const updatedData = {
+                    primary_name: $('#primary_name').val(),
+                    primary_relationship: $('#primary_relationship').val(),
+                    primary_phone: $('#primary_phone').val(),
+                    secondary_name: $('#secondary_name').val(),
+                    secondary_relationship: $('#secondary_relationship').val(),
+                    secondary_phone: $('#secondary_phone').val(),
+                };
+
+                console.log("Submitted Data:", updatedData);  // Log submitted data
+
+                localStorage.setItem('contactInfo', JSON.stringify(updatedData));
+
+
+                $.ajax({
+                    url: '/edit/contact/',  // Adjust this URL according to your backend setup
+                    type: 'POST',  // Change to POST
+                    data: JSON.stringify(updatedData),  // Send data as JSON
+                    contentType: 'application/json',  // Set content type to JSON
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');  // Include CSRF token
+                    },
+
+                    success: function (response) {
+                        // Update the profile information on the page
+                        $('#primary-name').text(updatedData.primary_name);
+                        $('#primary-relationship').text(updatedData.primary_relationship);
+                        $('#primary-phone').text(updatedData.primary_phone);
+                        $('#secondary-name').text(updatedData.secondary_name);
+                        $('#secondary-relationship').text(updatedData.secondary_relationship);
+                        $('#secondary-phone').text(updatedData.secondary_phone);
+
+
+                    
+
                             // Hide the modal
-                            // $('#addNewAddressModal').modal('hide');
+                        // $('#addNewAddressModal').modal('hide');
                             // Optionally, show a success message
-                            window.location.href = '/';
-                            alert('Information updated successfully!');
-                        },
-                        error: function(xhr) {
-                            alert('Error updating information: ' + xhr.responseText);
-                        }
-                    });
+                        window.location.href = '/';
+                        alert('Information updated successfully!');
+                    },
+                    error: function(xhr) {
+                        alert('Error updating information: ' + xhr.responseText);
+                    }
                 });
             });
-        </script>
+        });
+
+
+    </script>
 </body>
+
 </html>
-
-
-

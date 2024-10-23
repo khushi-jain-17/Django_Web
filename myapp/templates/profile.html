@@ -482,36 +482,69 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <div class="card-body">
-                                            <div class="row" id="contact-info">
+                                        
+                                        <!-- <div class="card-body">
+                                            <div class="row">
                                                 <div class="col-xl-6 col-12">
                                                     <h6 class="pb-1 text-secondary">Primary</h6>
                                                     <dl class="row mb-0">
                                                         <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="primary-name"></dd>
-                                        
+                                                        <dd class="col-sm-8 mb-1" id="primary-name">Nidhi Sharma</dd>
+                                    
                                                         <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="primary-relationship"></dd>
-                                        
+                                                        <dd class="col-sm-8 mb-1" id="primary-relationship">Wife</dd>
+                                    
                                                         <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="primary-phone"></dd>
+                                                        <dd class="col-sm-8 mb-1" id="primary-phone">9111023020</dd>
                                                     </dl>
                                                 </div>
                                                 <div class="col-xl-6 col-12">
                                                     <h6 class="pb-1 text-secondary">Secondary</h6>
                                                     <dl class="row mb-0">
                                                         <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="secondary-name"></dd>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-name">Chetan Joshi</dd>
+                                    
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-relationship">Brother</dd>
+                                    
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-phone">8109286754</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Primary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="primary-name">Nidhi Sharma</dd>
                                         
                                                         <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="secondary-relationship"></dd>
+                                                        <dd class="col-sm-8 mb-1" id="primary-relationship">Wife</dd>
                                         
                                                         <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
-                                                        <dd class="col-sm-8 mb-1" id="secondary-phone"></dd>
+                                                        <dd class="col-sm-8 mb-1" id="primary-phone">9111023020</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-xl-6 col-12">
+                                                    <h6 class="pb-1 text-secondary">Secondary</h6>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Name:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-name">Chetan Joshi</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Relationship:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-relationship">Brother</dd>
+                                        
+                                                        <dt class="col-sm-4 fw-bolder mb-1">Phone:</dt>
+                                                        <dd class="col-sm-8 mb-1" id="secondary-phone">8109286754</dd>
                                                     </dl>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+
                                         
                                     </div>
                                     <!--/ Emergency Contact -->
@@ -984,26 +1017,48 @@
         }
         
     });
-    $(document).ready(function() {
-    // Retrieve contact info from localStorage
-    const contactInfo = JSON.parse(localStorage.getItem('contactInfo'));
+ 
 
-    // Check if contact info exists
-    if (contactInfo) {
-        // Populate primary contact information
-        $('#primary-name').text(contactInfo.primary.name);
-        $('#primary-relationship').text(contactInfo.primary.relationship);
-        $('#primary-phone').text(contactInfo.primary.phone);
+    function loadContactInfo() {
+            const contactInfo = JSON.parse(localStorage.getItem('contactInfo'));
 
-        // Populate secondary contact information
-        $('#secondary-name').text(contactInfo.secondary.name);
-        $('#secondary-relationship').text(contactInfo.secondary.relationship);
-        $('#secondary-phone').text(contactInfo.secondary.phone);
-    } else {
-        // Optionally handle the case where there is no contact info
-        console.log("No contact information found in localStorage.");
-    }
-});
+            if (contactInfo) {
+                // Update primary contact information
+                document.getElementById('primary-name').innerText = contactInfo.primary.name;
+                document.getElementById('primary-relationship').innerText = contactInfo.primary.relationship;
+                document.getElementById('primary-phone').innerText = contactInfo.primary.phone;
+
+                // Update secondary contact information
+                document.getElementById('secondary-name').innerText = contactInfo.secondary.name;
+                document.getElementById('secondary-relationship').innerText = contactInfo.secondary.relationship;
+                document.getElementById('secondary-phone').innerText = contactInfo.secondary.phone;
+            }
+        }
+
+        // Call the function to load contact info when the page loads
+        window.onload = loadContactInfo;
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve contact information from localStorage
+        const contactInfo = JSON.parse(localStorage.getItem('contactInfo'));
+
+        // Check if contact info exists
+        if (contactInfo) {
+            // Populate primary contact information
+            document.getElementById('primary-name').textContent = contactInfo.primary_name || 'N/A';
+            document.getElementById('primary-relationship').textContent = contactInfo.primary_relationship || 'N/A';
+            document.getElementById('primary-phone').textContent = contactInfo.primary_phone || 'N/A';
+
+            // Populate secondary contact information
+            document.getElementById('secondary-name').textContent = contactInfo.secondary_name || 'N/A';
+            document.getElementById('secondary-relationship').textContent = contactInfo.secondary_relationship || 'N/A';
+            document.getElementById('secondary-phone').textContent = contactInfo.secondary_phone || 'N/A';
+        } else {
+            console.log("No contact information found in localStorage.");
+        }
+    });
+
+
         
     </script>
 

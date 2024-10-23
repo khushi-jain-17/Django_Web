@@ -16,10 +16,6 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-# def profile(request):
-#     user_id = request.user.id  # Example for getting the user's ID
-#     return render(request, 'profile.html', {'id': user_id})
-
 
 def dashboard(request):
     return render(request, 'index.html')
@@ -104,11 +100,6 @@ def bank_detail(request, id):
     print(bank)
     return render(request, 'bank_detail.html', {'bank':bank})
 
-# def edit_bank(request, bank_id):
-#     bank = get_object_or_404(BankInfo, id=bank_id)
-
-#     if request.method == "GET":
-#         return render(request, 'edit_bank.html', {'bank': bank})
 
 def bank_create(request):
     if request.method == 'POST':

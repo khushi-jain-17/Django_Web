@@ -1,10 +1,14 @@
 from django.db import models
 
 
+
+
+
 class Profile(models.Model):
     emp_id = models.CharField(max_length=10)
     name = models.CharField(max_length=100, null=True)
     email = models.EmailField(null=True)
+    password = models.CharField(max_length=50, null=True)
     status = models.CharField(max_length=100, default='active')
     role = models.CharField(max_length=200, null=True)
     contact = models.CharField(max_length=15, null=True)
@@ -81,4 +85,10 @@ class Contact(models.Model):
     secondary_name = models.CharField(max_length=100, blank=True, null=True)
     secondary_relationship = models.CharField(max_length=100, blank=True, null=True)
     secondary_phone = models.CharField(max_length=15, blank=True, null=True) 
+
+
+
+
+
+
 
