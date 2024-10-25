@@ -16,18 +16,24 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN: Head-->
 
 <head>
+    {% load static %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description"
+        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
     <link rel="apple-touch-icon" href="{% static 'app-assets/images/ico/apple-icon-120.png' %}">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'app-assets/images/ico/favicon.ico' %}">
     <link rel="icon" type="image/png" href="{% static 'app-assets/images/ico/favicon.png' %}">
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+        rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'vendors/css/vendors.min.css' %}">
@@ -53,12 +59,15 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
     <!-- END: Custom CSS-->
 
+
+
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
+<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click"
+    data-menu="vertical-menu-modern" data-col="blank-page">
     <!-- BEGIN: Content-->
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -72,36 +81,84 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!-- Login basic -->
                         <div class="card mb-0">
                             <div class="card-body">
-                                <a class="brand-logo" href="#"><img src="{% static 'app-assets/images/logo/logo.png' %}" class="" alt="Alcyone"></a>
+                                <a class="brand-logo" href="#"><img src="{% static 'app-assets/images/logo/logo.png' %}"
+                                        class="" alt="Alcyone"></a>
 
                                 <h4 class="card-title mb-1">Welcome Again! 👋</h4>
                                 <p class="card-text mb-2">Please sign-in to your account.</p>
 
-                                <form class="auth-login-form mt-2" action="index.html" method="POST">
+                                <!-- <form class="auth-login-form mt-2" action="{% url 'login-view' %}" method="POST"> 
+                                    {% csrf_token %}
                                     <div class="mb-1">
-                                        <label for="login-email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" id="login-email" name="login-email" placeholder="john@example.com" aria-describedby="login-email" tabindex="1" autofocus />
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="john@example.com" aria-describedby="email" tabindex="1"
+                                            autofocus />
                                     </div>
 
                                     <div class="mb-1">
                                         <div class="d-flex justify-content-between">
-                                            <label class="form-label" for="login-password">Password</label>
+                                            <label class="form-label" for="password">Password</label>
                                             <a href="{% url 'forgot' %}">
                                                 <small>Forgot Password?</small>
                                             </a>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
-                                            <input type="password" class="form-control form-control-merge" id="login-password" name="login-password" tabindex="2" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="login-password" />
-                                            <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+                                            <input type="password" class="form-control form-control-merge" id="password"
+                                                name="password" tabindex="2"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                aria-describedby="password" />
+                                            <span class="input-group-text cursor-pointer"><i
+                                                    data-feather="eye"></i></span>
                                         </div>
                                     </div>
                                     <div class="mb-1">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-me" tabindex="3" />
+                                            <input class="form-check-input" type="checkbox" id="remember-me"
+                                                tabindex="3" />
                                             <label class="form-check-label" for="remember-me"> Remember Me </label>
                                         </div>
                                     </div>
                                     <button class="btn btn-primary w-100 mb-2" tabindex="4">Sign in</button>
+                                </form> --> -->
+
+
+                                <form class="auth-login-form mt-2" id="loginForm" action="{% url 'login-view' %}"
+                                    method="post">
+
+                                    {% csrf_token %}
+                                    <div class="mb-1">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="john@example.com" aria-describedby="email" tabindex="1"
+                                            autofocus />
+                                    </div>
+
+                                    <div class="mb-1">
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label" for="password">Password</label>
+                                            <a href="{% url 'forgot' %}">
+                                                <small>Forgot Password?</small>
+                                            </a>
+                                        </div>
+                                        <div class="input-group input-group-merge form-password-toggle">
+                                            <input type="password" class="form-control form-control-merge" id="password"
+                                                name="password" tabindex="2"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                aria-describedby="password" />
+                                            <span class="input-group-text cursor-pointer"><i
+                                                    data-feather="eye"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="remember-me"
+                                                tabindex="3" />
+                                            <label class="form-check-label" for="remember-me"> Remember Me </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 mb-2" tabindex="4">Sign
+                                        in</button>
                                 </form>
 
                             </div>
@@ -121,6 +178,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'app-assets/vendors/js/forms/validation/jquery.validate.min.js' %}"></script>
     <!-- END: Page Vendor JS-->
 
@@ -134,18 +192,58 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: Page JS-->
 
     <script>
-        $(window).on('load', function() {
+        $(window).on('load', function () {
             if (feather) {
                 feather.replace({
                     width: 14,
                     height: 14
                 });
             }
-        })
+        });
+
+        $('#loginForm').on('submit', function (event) {
+            event.preventDefault();  // Prevent the default form submission
+
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            // Construct the data object and stringify it
+            var data = JSON.stringify({
+                email: email,
+                password: password,
+                csrfmiddlewaretoken: '{{ csrf_token }}'  // CSRF token included
+            });
+
+            $.ajax({
+                url: '{% url "login-view" %}',
+                type: 'POST',
+                contentType: 'application/json',
+                data: data,
+                success: function (response) {
+                    if (response.status === "success") {
+                        // Assuming the server returns the token in the response
+                        var token = response.token; // Make sure your server sends this token
+                        // document.cookie = "auth_token=" + token + "; path=/;"; // Set the cookie
+                        localStorage.setItem('token', token);
+                        alert('Login successful');
+                        window.location.href = "/index/"; // Redirect to another page
+                    } else {
+                        alert('Login failed: ' + response.message);
+                    }
+
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON?.message || "Login failed. Please try again.";
+                    alert(errorMessage);
+                }
+            });
+        });
     </script>
+
+
+
+
+
 </body>
-<!-- END: Body-->
 
 </html>
-
-

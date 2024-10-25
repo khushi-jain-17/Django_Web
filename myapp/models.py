@@ -14,13 +14,8 @@ class Profile(models.Model):
     contact = models.CharField(max_length=15, null=True)
     emergency_contact = models.CharField(max_length=20, null=True)
     blood_group = models.CharField(max_length=5, null=True)
-    nationality = models.CharField(max_length=50, null=True)
-    religion = models.CharField(max_length=50, null=True)
-    marital_status = models.CharField(max_length=10,null=True)
-    address = models.TextField(null=True)
-    country = models.CharField(max_length=50, null=True)
-    state = models.CharField(max_length=50, null=True)
-    zipcode = models.CharField(max_length=15, null=True)
+
+
 
     def __str__(self):
         return f"{self.name}"

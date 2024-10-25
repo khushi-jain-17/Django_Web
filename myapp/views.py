@@ -4,8 +4,119 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Profile, BankInfo, Education, Experience, PersonalInfo, Contact
 import json
+import bcrypt
+from .utils import *
+import logging
+
+logger = logging.getLogger(__name__)
+
+password = "my_secure_password"
 
 
+salt = bcrypt.gensalt()
+
+
+# @csrf_exempt
+# def login(request):
+#     if request.method == 'POST':
+#         try:
+           
+#             email = request.POST.get('email', '').lower()
+#             password = request.POST.get('password', '')
+        
+#             provided_password_bytes = password.encode('utf-8')
+
+#             logger.debug(f"Attempting to log in user with email: {email}")
+
+#             try:
+#                 user = Profile.objects.get(email=email)
+#                 logger.debug(f"User found: {user}")
+#                 user = user.email
+#                 print(user)
+#             except Profile.DoesNotExist:
+#                 logger.warning(f"No account found for email: {email}")
+#                 return JsonResponse({'message': 'Sorry, no account found. Please check your credentials or sign up to create an account.'}, status=404)
+            
+#             hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+#             password_attempt = "1234"
+
+#             # if bcrypt.checkpw(provided_password_bytes, user.password.encode('utf-8')):
+                    
+#             # if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+
+#             if bcrypt.checkpw(password_attempt.encode('utf-8'), hashed_password):
+               
+#                     access_token = generate_jwt_token(user)
+
+#                     request.session['jwt_token'] = access_token
+
+#                     response_data = {
+#                         'access_token': access_token,
+#                         'email': user.email,
+#                         'data': 'Login Successful',
+#                     }
+#                     return JsonResponse({'response': response_data}, status=200)
+#             else:
+#                 logger.warning(f"Incorrect password attempt for email: {email}")
+#                 return JsonResponse({'message': 'Incorrect password. Please try again.'}, status=400)
+
+#         except Exception as e:
+#             logger.error(f'Error during login: {str(e)}')
+#             return JsonResponse({'message': 'Something went wrong. Please try again later.'}, status=500)
+    
+#     return JsonResponse({'message': 'Invalid request method.'}, status=405)
+
+
+
+
+@csrf_exempt
+def login_view(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)  
+            email = data.get("email")
+            password = data.get("password")
+
+            try:
+                profile = Profile.objects.get(email=email)
+                
+                if profile.password == password:
+                    token = secrets.token_hex(16)
+                    response = JsonResponse({"message": "Login successful", "status": "success", "token":token})
+
+                    response.set_cookie(
+                        'auth_token',  # Cookie name
+                        token,         # Token value
+                        httponly=True, # JavaScript can't access this cookie
+                        secure=True,   # Only send cookie over HTTPS
+                        samesite='Lax' # Helps with CSRF protection
+                    )
+                    return response
+                else:
+                    return JsonResponse({"message": "Invalid password"}, status=400)
+            except Profile.DoesNotExist:
+                return JsonResponse({"message": "User does not exist"}, status=404)
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON"}, status=400)
+        except Exception as e:
+            return JsonResponse({"message": str(e)}, status=500)
+
+    return JsonResponse({"message": "Invalid request method"}, status=405)
+
+
+def login_page(request):
+    return render(request, 'auth-login-basic.html') 
+
+def logout_view(request):
+    if request.method == "POST":
+        response = JsonResponse({"message": "Logout successful", "status": "success"})
+        response.delete_cookie('auth_token')
+        return response
+    return JsonResponse({"message": "Invalid request method"}, status=405)
+
+
+def logout_page(request):
+    return render(request, 'auth-login-basic.html')
 
 
 def holiday_page(request):
@@ -16,13 +127,8 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-
 def dashboard(request):
     return render(request, 'index.html')
-
-
-def logout_page(request):
-    return render(request, 'auth-login-basic.html')
 
 
 def forget_password(request):
@@ -42,7 +148,7 @@ def get_user(request, emp_id):
                 'blood_group': profile.blood_group,
                 'email': profile.email,
                 'contact': profile.contact,
-                'status': 'Active'  # Assuming you have a status field, otherwise update this accordingly
+                'status': 'Active'
             }
             return JsonResponse({'status': 'success', 'data': data})
         except Profile.DoesNotExist:
@@ -53,7 +159,7 @@ def get_user(request, emp_id):
 def update_user(request, id):
     if request.method == 'PUT':
         try:
-            data = json.loads(request.body)  # Adjust according to how data is sent
+            data = json.loads(request.body) 
             
             employee = Profile.objects.get(emp_id=id)
             if not employee:
@@ -67,7 +173,7 @@ def update_user(request, id):
             employee.email = data.get('modalEditUserEmail')
             employee.contact = data.get('modalEditUserPhone')
             employee.name = f"{first_name} {middle_name} {last_name}"
-            employee.save()  # Save the updated employee
+            employee.save()  
             
             updated_employee_data = {
                 'emp_id': employee.emp_id,

@@ -9,8 +9,14 @@ urlpatterns = [
    path('', views.profile, name='home'),
    path('index/', views.dashboard, name='index'),
    path('holiday/', views.holiday_page, name='holiday'),
-   path('login/', views.logout_page, name='login'),
+
+   path('login-view/', views.login_view, name='login-view'),
+   path('login-page/', views.login_page, name='login-page'),
+   path('logout/', views.logout_page, name='logout'),
+   path('logout-view/', views.logout_view, name='logout-view'),
+
    path('forgot/',views.forget_password, name='forgot'),
+
    path('update-user-info/<str:id>/', views.update_user, name='update-user-info'),
    path('get-user-info/<str:emp_id>/', views.get_user, name='get_user_info'), 
 
