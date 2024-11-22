@@ -38,6 +38,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Check for auth token
+            if (!localStorage.getItem('token')) {
+                // Redirect to login page if token is missing
+                window.location.href = '/login-page/';
+            }
+
             $('#create-bank-btn').click(function(e) {
                 e.preventDefault();
                 
@@ -50,8 +56,6 @@
                 };
 
                 // Send AJAX POST request to create the bank
-
- 
                 $.ajax({
                     url: '/bank/create/',  // Adjust this URL according to your URL configuration
                     type: 'POST',
@@ -79,5 +83,3 @@
     </script>
 </body>
 </html>
-
-
